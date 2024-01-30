@@ -1,0 +1,22 @@
+@startuml
+
+!define RECTANGLE class
+
+package "On-Premises Deployment" {
+    
+    package "IIS Services" as IIS {
+      [Background Service 1] as bgService1 <<IIS Service>>
+      [Background Service 2] as bgService2 <<IIS Service>>
+    }
+    
+    [Database] as database <<MSSQL Database>>
+    [Finacle 10 API] as finacleApi <<finacle>>
+}
+
+
+bgService1 <-down-> [database]
+bgService2 <-down-> [database]
+
+IIS <-right-> [finacleApi]
+
+@enduml

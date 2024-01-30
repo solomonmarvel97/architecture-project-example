@@ -1,0 +1,18 @@
+@startuml
+
+!theme vibrant
+
+title User Login Flowchart
+
+:Admin logs in;
+if (Active Session Found?) then (yes)
+  :Notify Active Session already exists;
+  stop
+else (No)
+  :Create New Session Entry;
+  :Continue with Login Process;
+  :Successful Login;
+  stop
+endif
+
+@enduml

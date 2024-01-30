@@ -1,0 +1,34 @@
+@startuml
+
+!theme vibrant
+
+title Session Check during admin login
+
+actor "Admin" as Admin <<(A,green) actor >>
+database "MSSQL Database" as DB <<(D,violet) database >>
+participant "Application" as App <<(C,blue) component >>
+note right: Manages user login and sessions
+
+Admin -> App: Initiate Login
+activate App
+
+App -> DB: Check for Active Session
+activate DB
+DB --> App: Return Active Session Status
+deactivate DB
+
+alt Active Session Found
+  App --> Admin: Notify Active Session\nalready exists, decline login
+else No Active Session Found
+  App -> DB: Create New Session Entry
+  activate DB
+  DB --> App: New Session Entry Created
+  deactivate DB
+
+  App -> App: Continue with Login Process
+  App --> Admin: Successful Login
+end
+
+deactivate App
+
+@enduml

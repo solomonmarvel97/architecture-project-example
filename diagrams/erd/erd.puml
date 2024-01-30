@@ -1,0 +1,25 @@
+@startuml
+
+!theme vibrant
+
+entity "AdminActiveSessionLog" {
+  +id: int [PK]
+  LoginName: varchar(50) [NN]
+  IsActive: bit [NN] (default 1)
+  LastUpdated: smalldatetime [NN]
+}
+
+entity "AdminActivityLogs" {
+  +ActivityLogId: bigint [PK]
+  CustomerId: varchar(50) [NN]
+  LoginName: varchar(50) [NN]
+  ActivityCategory: varchar(50) [NN]
+  ActivityDetails: varchar(200) [NN]
+  LogDate: smalldatetime [NN]
+  LoginComputerName: varchar(200) [NN]
+  LoginComputerIP: varchar(80) [NN]
+}
+
+AdminActiveSessionLog --|{ AdminActivityLogs: LoginName
+
+@enduml
